@@ -8,8 +8,9 @@ import { AppComponent } from './app.component';
 import { AppPrimeNgModule } from './app.primeng.module';
 import { ProductsComponent } from './components/products/products.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxLoadingModule } from 'ngx-loading';
 
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -23,9 +24,10 @@ import { ConfirmationService } from 'primeng/api';
     ReactiveFormsModule,
     AppRoutingModule,
     AppPrimeNgModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxLoadingModule.forRoot({})
   ],
-  providers: [ConfirmationService],
+  providers: [ConfirmationService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

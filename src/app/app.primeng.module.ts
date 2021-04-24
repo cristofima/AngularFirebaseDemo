@@ -9,6 +9,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { CalendarModule } from 'primeng/calendar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
+import { MessageModule } from 'primeng/message';
 
 @NgModule({
   imports: [
@@ -21,7 +23,9 @@ import { DialogModule } from 'primeng/dialog';
     InputSwitchModule,
     CalendarModule,
     ConfirmDialogModule,
-    DialogModule
+    DialogModule,
+    ToastModule,
+    MessageModule
   ],
   exports: [
     TableModule,
@@ -33,7 +37,9 @@ import { DialogModule } from 'primeng/dialog';
     InputSwitchModule,
     CalendarModule,
     ConfirmDialogModule,
-    DialogModule
+    DialogModule,
+    ToastModule,
+    MessageModule
   ]
 })
 export class AppPrimeNgModule{

@@ -28,9 +28,11 @@
   </ng-template>
 </p-table>
 
+<ngx-loading [show]="showLoading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
 <p-dialog header="Save Product" [(visible)]="displayDialog" [modal]="true" [style]="{width: '70vw'}">
+  <p-message severity="error" *ngIf="hasError" text="Error saving data"></p-message>
   <form [formGroup]="formGroup">
     <div class="p-fluid p-formgrid p-grid">
       <div class="p-field p-col-12 p-md-6">
