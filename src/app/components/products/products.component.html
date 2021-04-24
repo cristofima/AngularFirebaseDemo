@@ -1,14 +1,16 @@
+<button pButton type="button" label="Add product" style="margin-bottom: 10px;" (click)="showDialog()" routerLinkActive="router-link-active" ></button>
 <p-table [responsive]="true" [value]="products" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [loading]="loading">
   <ng-template pTemplate="caption">
     Products
   </ng-template>
   <ng-template pTemplate="header">
       <tr>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Stock</th>
-          <th>Enabled</th>
-          <th>Expiration Date</th>
+          <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+          <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
+          <th pSortableColumn="stock">Stock <p-sortIcon field="stock"></p-sortIcon></th>
+          <th pSortableColumn="enabled">Enabled <p-sortIcon field="enabled"></p-sortIcon></th>
+          <th pSortableColumn="expirationDate">Expiration Date <p-sortIcon field="expirationDate"></p-sortIcon></th>
+          <th style="width: 125px;"></th>
       </tr>
   </ng-template>
   <ng-template pTemplate="body" let-product>
@@ -18,6 +20,50 @@
         <td>{{product.stock}}</td>
         <td>{{product.enabled ? 'Yes' : 'No'}}</td>
         <td>{{product.expirationDate | date:'mediumDate'}}</td>
+        <td>
+          <button pButton type="button" (click)="showDialog(product)" icon="pi pi-pencil" class="p-button-success" pTooltip="Edit"></button>
+          <button pButton type="button" (click)="deleteProduct(product.productId)" icon="pi pi-trash" class="p-button-danger" style="margin-left: 5px;" pTooltip="Delete"></button>
+        </td>
       </tr>
   </ng-template>
 </p-table>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<p-dialog header="Save Product" [(visible)]="displayDialog" [modal]="true" [style]="{width: '70vw'}">
+  <form [formGroup]="formGroup">
+    <div class="p-fluid p-formgrid p-grid">
+      <div class="p-field p-col-12 p-md-6">
+          <label for="name">Name</label>
+          <input id="name" type="text" pInputText formControlName="name">
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+          <label for="price">Price</label>
+          <p-inputNumber id="price" formControlName="price" [showButtons]="true" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="2"></p-inputNumber>
+      </div>
+      <div class="p-field p-col-12 p-md-4">
+          <label for="stock">Stock</label>
+          <p-inputNumber id="stock" formControlName="stock" [showButtons]="true"></p-inputNumber>
+      </div>
+      <div class="p-field p-col-12 p-md-5">
+        <label for="expirationDate">Expiration Date</label>
+        <p-calendar formControlName="expirationDate" appendTo="body" [showIcon]="true"></p-calendar>
+      </div>
+      <div class="p-field p-col-12 p-md-3">
+          <label for="enabled">Enabled</label>
+          <div>
+            <p-inputSwitch id="enabled" formControlName="enabled"></p-inputSwitch>
+          </div>
+      </div>
+      <div class="p-field p-col-12">
+        <label for="description">Description</label>
+        <textarea id="description" formControlName="description" [rows]="5" pInputTextarea></textarea>
+    </div>
+    </div>
+  </form>
+
+  <p-footer>
+    <button pButton type="button" label="Cancel" class="p-button-secondary" (click)="displayDialog = false"></button>
+    <button pButton [disabled]="!formGroup.valid" type="button" label="Save" style="margin-left: 10px;" (click)="saveProduct()" class="p-button-success"></button>
+  </p-footer>
+</p-dialog>

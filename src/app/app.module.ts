@@ -7,22 +7,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppPrimeNgModule } from './app.primeng.module';
 import { ProductsComponent } from './components/products/products.component';
-import { SaveProductComponent } from './components/save-product/save-product.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductsComponent,
-    SaveProductComponent
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     AppPrimeNgModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
