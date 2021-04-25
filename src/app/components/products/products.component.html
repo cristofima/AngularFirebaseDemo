@@ -28,7 +28,6 @@
   </ng-template>
 </p-table>
 
-<ngx-loading [show]="showLoading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
 <p-dialog header="Save Product" [(visible)]="displayDialog" [modal]="true" [style]="{width: '70vw'}">
@@ -60,7 +59,7 @@
       <div class="p-field p-col-12">
         <label for="description">Description</label>
         <textarea id="description" formControlName="description" [rows]="5" pInputTextarea></textarea>
-    </div>
+      </div>
     </div>
   </form>
 

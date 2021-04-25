@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { AppPrimeNgModule } from './app.primeng.module';
 import { ProductsComponent } from './components/products/products.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgxLoadingModule } from 'ngx-loading';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 
@@ -24,8 +23,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
     ReactiveFormsModule,
     AppRoutingModule,
     AppPrimeNgModule,
-    HttpClientModule,
-    NgxLoadingModule.forRoot({})
+    HttpClientModule
   ],
   providers: [ConfirmationService, MessageService],
   bootstrap: [AppComponent]

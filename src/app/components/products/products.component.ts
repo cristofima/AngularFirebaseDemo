@@ -14,7 +14,6 @@ export class ProductsComponent implements OnInit {
   products: ProductModel[];
   productIdToUpdate: number;
   loading: boolean;
-  showLoading: boolean;
   displayDialog: boolean;
   hasError: boolean;
 
@@ -64,21 +63,15 @@ export class ProductsComponent implements OnInit {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to delete the product?',
       accept: () => {
-        this.showLoading = true;
         this.productService.deleteProduct(productId).subscribe(()=>{
-          this.showLoading = false;
           this.products = this.products.filter(x => x.productId != productId);
           this.messageService.add({severity:'success', detail: 'Product deleted'});
-        }, ()=>{
-          this.showLoading = false;
         });
       }
     });
   }
 
   saveProduct(){
-    this.showLoading = true;
-
     if(this.productIdToUpdate){
       let payload: ProductModel = {
         ...this.formGroup.value,
@@ -91,12 +84,10 @@ export class ProductsComponent implements OnInit {
           this.products[index] = res;
         }
 
-        this.showLoading = false;
         this.displayDialog = false;
         this.messageService.add({severity:'success', detail: 'Product updated'});
       }, ()=>{
         this.hasError = true;
-        this.showLoading = false;
       });
     }else{
       let payload: ProductModel = {
@@ -106,11 +97,9 @@ export class ProductsComponent implements OnInit {
       this.productService.addProduct(payload).subscribe(res =>{
         this.products.push(res);
         this.displayDialog = false;
-        this.showLoading = false;
         this.messageService.add({severity:'success', detail: 'Product added'});
       }, ()=>{
         this.hasError = true;
-        this.showLoading = false;
       });
     }
   }
